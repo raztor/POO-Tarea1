@@ -15,7 +15,8 @@ public class Stage1 {
         for (int i = 0; i < numDoors; i++)
             doors.add(new Door());
         int numWindows = in.nextInt();
-        ....
+        for (int i = 0; i < numWindows; i++)
+            windows.add(new Window());
         in.close();
     }
     public void executeUserInteraction (Scanner in, PrintStream out){
@@ -35,7 +36,13 @@ public class Stage1 {
                         doors.get(0).close();
                     break;
                 case 'w':
-                    ....
+                    parameter = in.next().charAt(0);
+                    if (parameter == 'o')
+                        windows.get(0).open();
+                    else
+                        windows.get(0).close();
+                    break;
+
                 case 'x': done=true;   // Added to finish the program
             }
         }
