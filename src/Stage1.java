@@ -29,10 +29,8 @@ public class Stage1 {
             switch (command) {
                 case 'd':
                     parameter = in.next().charAt(0);
-                    //System.out.println("Esta en d");
                     if (parameter == 'o') {
                         doors.get(0).open();
-                        //System.out.println("esta d abierto");
                     }
                     else
                         doors.get(0).close();
@@ -40,19 +38,19 @@ public class Stage1 {
 
                 case 'w':
                     parameter = in.next().charAt(0);
-                    //System.out.println("Esta en w");
                     if (parameter == 'o'){
-                        //System.out.println("esta w abierto");
                         windows.get(0).open();
                     }
                     else
                         windows.get(0).close();
                     break;
 
-                case 'x': done=true;   // Added to finish the program
-
+                case 'x': done=true;
+            }if(!done) {
+                printState(step++, out);
+                out.println();
             }
-        }printState(step++, out);
+        }
     }
     public void printHeader(PrintStream out){
         out.print("Step");
@@ -64,8 +62,6 @@ public class Stage1 {
         out.print(step);
         for (Door door : doors) out.print("\t" + door.getState());
         for (Window window : windows) out.print("\t" + window.getState());
-
-
     }
     public static void main(String [] args) throws IOException {
         if (args.length != 1) {
