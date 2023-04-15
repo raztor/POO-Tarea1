@@ -16,13 +16,13 @@ public class Stage2 {
         for (int i = 0; i < numDoors; i++) {
             Door d = new Door();
             doors.add(d);
-            central.addNewSensor();
+            central.addNewSensor(d.getMagneticSensor());
         }
         int numWindows = in.nextInt();
         for (int i = 0; i < numWindows; i++) {
             Window w = new Window();
             windows.add(w);
-            central....
+            central.addNewSensor(w.getMagneticSensor());
         }
         in.nextLine();
         String soundFile = in.next();
@@ -50,7 +50,13 @@ public class Stage2 {
                         doors.get(i).close();
                     break;
                 case 'w':
-                    ...                    break;
+                    parameter = in.next().charAt(0);
+                    if (parameter == 'o'){
+                        windows.get(0).open();
+                    }
+                    else
+                        windows.get(0).close();
+                    break;
                 case 'k':
                     parameter = in.next().charAt(0);
                     switch (parameter) {

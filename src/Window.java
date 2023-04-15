@@ -20,6 +20,10 @@ public class Window {
     public int getState(){
         return state.ordinal();
     }
+
+    public MagneticSensor getMagneticSensor() {
+        return magneticSensor;
+    }
     private MagneticSensor magneticSensor;
     private State state;
     private final int id;

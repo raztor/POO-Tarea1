@@ -17,7 +17,7 @@ public class Central {
         zone0.add(s);
     }
     public void checkZone(){
-        ...
+
     }
     public String getHeader(){
         return "Central";
