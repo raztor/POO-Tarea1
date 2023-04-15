@@ -16,7 +16,7 @@ public class Stage2 {
         for (int i = 0; i < numDoors; i++) {
             Door d = new Door();
             doors.add(d);
-            central....
+            central.addNewSensor();
         }
         int numWindows = in.nextInt();
         for (int i = 0; i < numWindows; i++) {
