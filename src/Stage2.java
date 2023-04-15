@@ -60,19 +60,29 @@ public class Stage2 {
                 case 'k':
                     parameter = in.next().charAt(0);
                     switch (parameter) {
-                        ...
+                        case 'a':
+                            central.arm();
+                            central.setArmedState(1);
+                            break;
+                        case 'p':
+                            central.arm();
+                            central.setArmedState(0);
+                            break;
                     }
             }
             central.checkZone();
         }
     }
     public void printHeader(PrintStream out){
-        ...
+        out.print("Step");
+        for (Door door : doors) out.print("\t" + door.getHeader());
+        for (Window window : windows) out.print("\t" + window.getHeader());
         out.println();
     }
-    public void printState(int step, PrintStream out){
-        ...
-        out.println();
+    public void printState(int step, PrintStream out) {
+        out.print(step);
+        for (Door door : doors) out.print("\t" + door.getState());
+        for (Window window : windows) out.print("\t" + window.getState());
     }
     public static void main(String [] args) throws IOException {
         if (args.length != 1) {
