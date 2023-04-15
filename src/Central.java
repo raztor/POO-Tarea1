@@ -2,16 +2,14 @@ import java.util.ArrayList;
 
 public class Central {
     public Central(){
-        zone0 = new ArrayList<Sensor>();
+        zone0 = new ArrayList<Sensor>(); // Cada zona tiene que tener al menos un sensor.
         isArmed = false;
         siren = null;
     }
     public void arm() {
         isArmed=true;
     }
-    public void disarm() {
-        ....
-    }
+    public void disarm() { isArmed=false; }
     public void setSiren(Siren s) {
         siren =s;
     }

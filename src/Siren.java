@@ -9,22 +9,29 @@ public class Siren {
         catch (Exception exc){
             exc.printStackTrace(System.out);
         }
-        ...
+        aWave.run();
     }
     public void play(){
-        ...
+        isSounding = true;
         aWave= new AePlayWave(dir);
         aWave.start();
     }
     public void stop(){
-        ...
+        isSounding = false;
         aWave.stopSounding();
+
     }
     public String getHeader() {
         return "Siren";
     }
     public int getState() {
-        return ....;
+        if(isSounding){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+
     }
     private URL dir;
     private boolean isSounding;
