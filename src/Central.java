@@ -17,6 +17,15 @@ public class Central {
         zone0.add(s);
     }
     public void checkZone(){
+        for (Sensor s : zone0) {
+            if (s.getState()==SwitchState.OPEN) {
+                siren.play();
+                break;
+            }else if (s.getState()==SwitchState.CLOSE){
+                siren.stop();
+            }
+
+        }
 
     }
     public String getHeader(){
