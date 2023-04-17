@@ -10,7 +10,10 @@ public class Central {
         isArmed=true;
     }
     public void disarm() {
-        ....
+        isArmed=false;
+        siren.stop();
+        System.out.println(siren.getState());
+        //...
     }
     public void setSiren(Siren s) {
         siren =s;
@@ -19,7 +22,19 @@ public class Central {
         zone0.add(s);
     }
     public void checkZone(){
-        ...
+        //...
+        for (Sensor s: zone0){
+            if (s.getState()==SwitchState.OPEN){
+                if (isArmed){
+                    siren.play();
+                }if (!isArmed){
+                    //siren.stop();
+                }
+                /*else {
+                    siren.stop();
+                }*/
+            }
+        }
     }
     public String getHeader(){
         return "Central";
