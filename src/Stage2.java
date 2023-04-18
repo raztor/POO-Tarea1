@@ -89,6 +89,8 @@ public class Stage2 {
         out.print("Step");
         for (Door door : doors) out.print("\t" + door.getHeader());
         for (Window window : windows) out.print("\t" + window.getHeader());
+        out.print("\t" + siren.getHeader());
+        out.print("\t" + central.getHeader());
         out.println();
     }
     public void printState(int step, PrintStream out){
@@ -97,6 +99,10 @@ public class Stage2 {
         System.out.println("Step: " + step);
         for (Door door : doors) out.print("\t" + door.getState());
         for (Window window : windows) out.print("\t" + window.getState());
+        out.print("\t" + siren.getState());
+        out.print("\t" + central.getState());
+
+
     }
     public static void main(String [] args) throws IOException {
         if (args.length != 1) {
