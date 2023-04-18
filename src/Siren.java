@@ -9,17 +9,16 @@ public class Siren {
         catch (Exception exc){
             exc.printStackTrace(System.out);
         }
-        //...
     }
     public void play(){
         //...
         aWave= new AePlayWave(dir);
         aWave.start();
+        isSounding = true;
     }
     public void stop(){
-        //...
         aWave.stopSounding();
-        System.out.println(aWave.getState());
+        isSounding = false;
     }
     public String getHeader() {
         return "Siren";

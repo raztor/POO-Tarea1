@@ -2,6 +2,7 @@ public class Door {
     public Door () {
         magneticSensor = new MagneticSensor();
         state = State.CLOSE;
+        magneticSensor.putMagnetNearSwitch();
     }
     {
         id = nextId++;

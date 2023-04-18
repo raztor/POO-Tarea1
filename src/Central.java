@@ -12,8 +12,6 @@ public class Central {
     public void disarm() {
         isArmed=false;
         siren.stop();
-        System.out.println(siren.getState());
-        //...
     }
     public void setSiren(Siren s) {
         siren =s;
@@ -22,17 +20,14 @@ public class Central {
         zone0.add(s);
     }
     public void checkZone(){
-        //...
         for (Sensor s: zone0){
             if (s.getState()==SwitchState.OPEN){
                 if (isArmed){
-                    siren.play();
-                }if (!isArmed){
-                    //siren.stop();
+                    if(siren.getState()==0) {
+                        siren.play();
+                        break;
+                    }
                 }
-                /*else {
-                    siren.stop();
-                }*/
             }
         }
     }

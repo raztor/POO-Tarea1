@@ -75,11 +75,15 @@ public class Stage2 {
                             central.disarm();
                             break;
                     }
+                    break;
                 case 'x': done=true;
+                break;
+                default:
+                    System.out.println("Error, comando invalido");
+                    break;
             }if(!done) {
                 //printState(step, out);
-                System.out.println("if!Done");
-
+                //System.out.println("if!Done");
                 out.println();
             }
             central.checkZone();
@@ -96,7 +100,7 @@ public class Stage2 {
     public void printState(int step, PrintStream out){
         step++;
         out.print(step);
-        System.out.println("Step: " + step);
+        //System.out.println("Step: " + step);
         for (Door door : doors) out.print("\t" + door.getState());
         for (Window window : windows) out.print("\t" + window.getState());
         out.print("\t" + siren.getState());
