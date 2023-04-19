@@ -1,31 +1,33 @@
 import java.util.ArrayList;
 
 public class Central {
-    public Central() {
-        zone0 = new ArrayList<Sensor>(); // Cada zona tiene que tener al menos un sensor.
+    public Central(){
+        zone0 = new ArrayList<Sensor>();
         isArmed = false;
         siren = null;
+        Solo_perimetral = Boolean.FALSE;
     }
-
     public void arm() {
-        isArmed = true;
+        isArmed=true;
     }
-
     public void disarm() {
         isArmed=false;
         siren.stop();
     }
 
-    public void setSiren(Siren s) {
-        siren = s;
-    }
+    public void armPerimeter(){
 
-    public void addNewSensor(Sensor s) {
+    }
+    public void setSiren(Siren s) {
+        siren =s;
+    }
+    public void addNewSensor(Sensor s){
         zone0.add(s);
     }
     public void checkZone(){
         for (Sensor s: zone0){
             if (s.getState()==SwitchState.OPEN){
+                if(s.getClass()==PIR_Detector)
                 if (isArmed){
                     if(siren.getState()==0) {
                         siren.play();
@@ -35,26 +37,15 @@ public class Central {
             }
         }
     }
-
-    public String getHeader() {
+    public String getHeader(){
         return "Central";
     }
-
-    public int getState() {
-        return isArmed ? 1 : 0;
-    }
-
-    public int getArmedState() {
-        return ArmedState;
-    }
-    public int setArmedState(int state) {
-        return ArmedState = state;
+    public int getState(){
+        return isArmed?1:0;
     }
     private ArrayList<Sensor> zone0;
     private boolean isArmed;
     private Siren siren;
-    private int ArmedState;
 
-    //0 = perimetral, 1 = total
-
+    private Boolean Solo_perimetral;
 }
