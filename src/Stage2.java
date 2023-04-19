@@ -17,12 +17,15 @@ public class Stage2 {
             Door d = new Door();
             doors.add(d);
             central.addNewSensor(d.getMagneticSensor());
+            //...
         }
         int numWindows = in.nextInt();
         for (int i = 0; i < numWindows; i++) {
             Window w = new Window();
             windows.add(w);
             central.addNewSensor(w.getMagneticSensor());
+
+            //...
         }
         in.nextLine();
         String soundFile = in.next();
@@ -34,12 +37,13 @@ public class Stage2 {
         String command;
         char parameter;
         int i;
-        int step=0;
+        int step=-1;
+        boolean done =false;
         printHeader(out);
-        while (true) {
+        while (!done) {
             printState(step++, out);
             command = in.next();
-            if (command.charAt(0)=='x') break;
+            //if (command.charAt(0)=='x') break;
             switch (command.charAt(0)) {
                 case 'd':
                     i = Integer.parseInt(command.substring(1));
@@ -50,25 +54,33 @@ public class Stage2 {
                         doors.get(i).close();
                     break;
                 case 'w':
+                    i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);
                     if (parameter == 'o'){
-                        windows.get(0).open();
+                        windows.get(i).open();
                     }
                     else
-                        windows.get(0).close();
+                        windows.get(i).close();
                     break;
                 case 'k':
                     parameter = in.next().charAt(0);
                     switch (parameter) {
                         case 'a':
                             central.arm();
-                            central.setArmedState(1);
                             break;
                         case 'p':
-                            central.arm();
-                            central.setArmedState(0);
+                            //central.permimeter();
+                            break;
+                        case 'd':
+                            central.disarm();
                             break;
                     }
+                case 'x': done=true;
+            }if(!done) {
+                //printState(step, out);
+                System.out.println("if!Done");
+
+                out.println();
             }
             central.checkZone();
         }
@@ -77,12 +89,20 @@ public class Stage2 {
         out.print("Step");
         for (Door door : doors) out.print("\t" + door.getHeader());
         for (Window window : windows) out.print("\t" + window.getHeader());
+        out.print("\t" + siren.getHeader());
+        out.print("\t" + central.getHeader());
         out.println();
     }
-    public void printState(int step, PrintStream out) {
+    public void printState(int step, PrintStream out){
+        step++;
         out.print(step);
+        System.out.println("Step: " + step);
         for (Door door : doors) out.print("\t" + door.getState());
         for (Window window : windows) out.print("\t" + window.getState());
+        out.print("\t" + siren.getState());
+        out.print("\t" + central.getState());
+
+
     }
     public static void main(String [] args) throws IOException {
         if (args.length != 1) {

@@ -12,7 +12,10 @@ public class Central {
     }
 
     public void disarm() {
-        isArmed = false;
+        isArmed=false;
+        siren.stop();
+        System.out.println(siren.getState());
+        //...
     }
 
     public void setSiren(Siren s) {
@@ -22,24 +25,20 @@ public class Central {
     public void addNewSensor(Sensor s) {
         zone0.add(s);
     }
-
-    public void checkZone() {
-        for (Sensor s : zone0) {
-            if (s.getState() == SwitchState.OPEN) {
-                if (getArmedState()==0 && s instanceof MagneticSensor) {
+    public void checkZone(){
+        //...
+        for (Sensor s: zone0){
+            if (s.getState()==SwitchState.OPEN){
+                if (isArmed){
                     siren.play();
-                    break;
-                }else if (getArmedState()==1) {
-                    siren.play();
-                    break;
+                }if (!isArmed){
+                    //siren.stop();
                 }
-
-            } else if (s.getState() == SwitchState.CLOSE) {
-                siren.stop();
+                /*else {
+                    siren.stop();
+                }*/
             }
-
         }
-
     }
 
     public String getHeader() {

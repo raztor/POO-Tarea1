@@ -28,6 +28,7 @@ public class AePlayWave extends Thread {
 			}
 		}
 	}
+
 	protected static void playOneAtATimeStopped () {
 		synchronized (AePlayWave.class) {
 			m_one = null;

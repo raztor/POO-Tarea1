@@ -17,6 +17,9 @@ public class Door {
     public String getHeader(){
         return "d"+id;
     }
+    public MagneticSensor getMagneticSensor() {
+        return magneticSensor;
+    }
     public int getState(){
         return state.ordinal();
     }
