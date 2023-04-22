@@ -1,8 +1,11 @@
 public class PIR_Detector{
 
     public PIR_Detector (){ //constructor, valores iniciales
-        state = State.CLOSE;
-
+        x=0;
+        y=0;
+        s_angle=0;
+        d_area_angle=0;
+        d_range = 0;
     }
 
     public int getState(){

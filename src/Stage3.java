@@ -8,6 +8,7 @@ public class Stage3 {
     public Stage3() {
         doors = new ArrayList<Door>();
         windows = new ArrayList<Window>();
+        pir = new ArrayList<PIR_Detector>();
     }
     public void readConfiguration(Scanner in){
         // reading <#_doors> <#_windows> <#_PIRs>
@@ -27,6 +28,13 @@ public class Stage3 {
 
             //...
         }
+        int numPIRs = in.nextInt();
+        for(int i=0; i< numPIRs; i++){
+            PIR_Detector pirs = new PIR_Detector();
+            pir.add(pirs);
+            //central.addNewSensor();
+        }
+
         in.nextLine();
         String soundFile = in.next();
         siren = new Siren(soundFile);
@@ -76,6 +84,11 @@ public class Stage3 {
                             break;
                     }
                     break;
+                case 'c':
+                    person = new Person();
+                    parameter = in.next().charAt(0);
+                    //ingresar coordenada X e Y
+                    //hacer un for hasta que suene la alarma con el PIR, moviendo la persona con las flechas
                 case 'x': done=true;
                 break;
                 default:
@@ -124,4 +137,6 @@ public class Stage3 {
     private ArrayList<Window> windows;
     private Central central;
     private Siren siren;
+    private PIR_Detector pir;
+    private Person person;
 }
