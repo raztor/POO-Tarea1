@@ -3,8 +3,8 @@ public class Person {
     private float coord_y;
 
     public Person() { // constructor
-        this.coord_x = 0.0f;
-        this.coord_y = 0.0f;
+        coord_x = 0.0f;
+        coord_y = 0.0f;
     }
 
     public void moveNorth() {
