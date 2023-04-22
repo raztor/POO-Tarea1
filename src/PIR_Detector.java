@@ -1,55 +1,45 @@
+import static java.lang.Math.sqrt;
 public class PIR_Detector{
 
     public PIR_Detector (){ //constructor, valores iniciales
-        x=0;
-        y=0;
-        s_angle=0;
-        d_area_angle=0;
-        d_range = 0;
+        direction_angle=0;
+        sensing_angle=0;
+        sensing_range=0;
+        coord_x=0;
+        coord_y=0;
     }
 
-    public int getState(){
-        return state.ordinal();
-    }
-    public void MotionDetected() {
-        state = State.OPEN;
+    public void setY (float y){
+        this.coord_y = y;
     }
 
-    public void resetDetection(){
-        state = State.CLOSE;
+    public void setX (float x){
+        this.coord_x = x;
     }
 
-    public void detectMotion() {
-        float distance = (float) Math.sqrt(Math.pow(person.getX(), 2) + Math.pow(person.getY(), 2));
-        if (distance % 2 == 1) {
-            sensor.setState(SwitchState.OPEN);
+    public void detectMotion(){
+        float dist_person = Math.sqrt(Math.pow(p.getX()-coord_x,2)+Math.pow(p.getY()-coord_y,2)); //distancia entre dos puntos, rango y persona
+        float angle = Math.atan((p.getX()-coord_x)/(p.getY()-coord_y));
+        if(dist_person<=sensing_range){
+            if(sensing_range-(sensing_angle/2)<=angle && angle<=sensing_range+(sensing_angle/2)){
+                siren.play();
+            }
+        }
+        else{
+            siren.stop();
         }
     }
 
-    public void sensor_angle(float s_angle){ //orientacion área de deteccion sujeto a la posicion (x,y)
-        this.s_angle = s_angle;
-    }
-    public void detection_area(float d_area_angle){ //cono angulo de deteccion
-       this.d_area_angle = d_area_angle;
-    }
-    public void detection_range(float d_range){ //rango de deteccion en metros//// ;
-        this.d_range = d_range;
-    }
-    public void pos_x(int x){
-        this.x = x;
+    public void resetMotion(){
+        siren.stop();
     }
 
-    public void pos_y(int y){
-        this.y = y;
-    }
 
-    private int x;
-    private int y;
-    private Sensor sensor;
-    private Person person;
-    private State state;
-    private float s_angle;
-    private float d_area_angle;
-    private float d_range;
-
+    private float direction_angle; //orientación del área de detección
+    private float sensing_angle; //ángulo cono sensor
+    private float sensing_range; // rango detección
+    private float coord_x;
+    private float coord_y;
+    private Siren siren;
+    protected Person p;
 }
