@@ -31,7 +31,8 @@ public class Stage3 {
         int numPIRs = in.nextInt();
         for(int i=0; i< numPIRs; i++){
             PIR_Detector pirs = new PIR_Detector();
-            //añadir coordenadas, rango, angulo de deteccion, angulo de direccion
+            pir.add(pirs);
+            central.addNewSensor(pirs.getSensor());
         }
 
         in.nextLine();

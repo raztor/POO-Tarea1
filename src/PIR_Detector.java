@@ -1,5 +1,5 @@
 import static java.lang.Math.sqrt;
-public class PIR_Detector{
+public class PIR_Detector extends Sensor{
 
     public PIR_Detector (){ //constructor, valores iniciales
         direction_angle=0;
@@ -34,6 +34,10 @@ public class PIR_Detector{
         siren.stop();
     }
 
+    public Sensor getSensor(){
+        return s;
+    }
+
 
     private float direction_angle; //orientación del área de detección
     private float sensing_angle; //ángulo cono sensor
@@ -42,4 +46,6 @@ public class PIR_Detector{
     private float coord_y;
     private Siren siren;
     protected Person p;
+
+    protected Sensor s;
 }
