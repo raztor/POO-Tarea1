@@ -30,4 +30,14 @@ public class Person {
     public float getY() {
         return coord_y;
     }
+    public void setX(float x){
+
+        coord_x = x;
+
+    }
+    public void setY(float y){
+
+        coord_y = y;
+
+    }
 }

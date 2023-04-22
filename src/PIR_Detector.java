@@ -7,6 +7,7 @@ public class PIR_Detector extends Sensor{
         sensing_range=0;
         coord_x=0;
         coord_y=0;
+        isSounding = false;
     }
 
     public void setY (float y){
@@ -23,12 +24,16 @@ public class PIR_Detector extends Sensor{
         if(dist_person<=sensing_range){
             if(sensing_range-(sensing_angle/2)<=angle && angle<=sensing_range+(sensing_angle/2)){
                 siren.play();
+                isSounding = true;
             }
         }
         else{
             siren.stop();
+            isSounding = false;
         }
     }
+
+    public boolean getState_pir(){return isSounding;}
 
     public void resetMotion(){
         siren.stop();
@@ -44,6 +49,7 @@ public class PIR_Detector extends Sensor{
     private float sensing_range; // rango detección
     private float coord_x;
     private float coord_y;
+    private boolean isSounding;
     private Siren siren;
     protected Person p;
 

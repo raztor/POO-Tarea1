@@ -1,3 +1,4 @@
+import javax.naming.OperationNotSupportedException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -85,10 +86,42 @@ public class Stage3 {
                     }
                     break;
                 case 'c':
+                    i = Integer.parseInt(command.substring(1));
+                    int number;
                     person = new Person();
                     parameter = in.next().charAt(0);
-                    //ingresar coordenada X e Y
+                    if(parameter == '0'){number = 0;}else{
+                        number = parameter;
+                        number = number-48;
+                    }
+                    person.setX(number);
+                    parameter = in.next().charAt(0);
+                    if(parameter == '0'){number = 0;}else{
+                        number = parameter;
+                        number = number-48;
+                    }        // esto no funciona al 100% si alguien ingresa la lesera con un numero decimal creo que no funcianara
+                    person.setY(number);
+
                     //hacer un for hasta que suene la alarma con el PIR, moviendo la persona con las flechas
+                    while(!pir.get(i).getState_pir()){
+                        parameter = in.next().charAt(0);
+                        switch (parameter) {
+                            case '↑':
+                                person.moveNorth();
+                                break;
+                            case '↓':
+                                person.moveSouth();
+                                break;
+                            case '→':
+                                person.moveEast();
+                                break;
+                            case '←':
+                                person.moveWest();
+                                break;
+                        }
+
+
+                    }
                 case 'x': done=true;
                 break;
                 default:
@@ -135,8 +168,8 @@ public class Stage3 {
 
     private ArrayList<Door> doors;
     private ArrayList<Window> windows;
+    private ArrayList<PIR_Detector> pir;
     private Central central;
     private Siren siren;
-    private PIR_Detector pir;
     private Person person;
 }
