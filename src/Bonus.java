@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Bonus {
+    private int retardo = 5;
     public Bonus() {
         doors = new ArrayList<Door>();
         windows = new ArrayList<Window>();
@@ -16,7 +17,7 @@ public class Bonus {
         // reading <#_doors> <#_windows> <#_PIRs>
         in.useLocale(java.util.Locale.US);
         //Acá se aprecia como se configura el retardo de la central
-        central = new Central(5);
+        central = new Central(retardo);
         int numDoors = in.nextInt();
         for (int i = 0; i < numDoors; i++) {
             Door d = new Door();
