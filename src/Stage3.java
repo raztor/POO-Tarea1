@@ -1,9 +1,10 @@
-import javax.naming.OperationNotSupportedException;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Stage3 {
     public Stage3() {
@@ -13,6 +14,7 @@ public class Stage3 {
     }
     public void readConfiguration(Scanner in){
         // reading <#_doors> <#_windows> <#_PIRs>
+        in.useLocale(java.util.Locale.US);
         central = new Central();
         int numDoors = in.nextInt();
         for (int i = 0; i < numDoors; i++) {
@@ -26,23 +28,37 @@ public class Stage3 {
             Window w = new Window();
             windows.add(w);
             central.addNewSensor(w.getMagneticSensor());
-
             //...
         }
-        int numPIRs = in.nextInt();
-        for(int i=0; i< numPIRs; i++){
-            PIR_Detector pirs = new PIR_Detector();
-            pir.add(pirs);
-            central.addNewSensor(pirs.getSensor());
-        }
 
+        int numPIRs = in.nextInt();
+        for (int i = 0; i < numPIRs; i++) {
+            in.nextLine();
+            double x, y, directionAngle, sensingAngle, sensingRange;
+            try {
+                x = in.nextDouble();
+                y = in.nextDouble();
+                directionAngle = in.nextDouble();
+                sensingAngle = in.nextDouble();
+                sensingRange = in.nextDouble();
+            } catch (InputMismatchException e) {
+                System.err.println("Error: formato de coordenadas incorrecto en la línea " + (i+3));
+                return; // Salir del método si hay un error
+            }
+            PIR_Detector p = new PIR_Detector(x,y,directionAngle,sensingAngle,sensingRange);
+            pir.add(p);
+            central.addNewSensor(p.getSensor());
+        }
         in.nextLine();
         String soundFile = in.next();
         siren = new Siren(soundFile);
         central.setSiren(siren);
         in.close();
-    }
+
+        }
+
     public void executeUserInteraction (Scanner in, PrintStream out){
+        in.useLocale(java.util.Locale.US);
         String command;
         char parameter;
         int i;
@@ -83,53 +99,46 @@ public class Stage3 {
                         case 'd':
                             central.disarm();
                             break;
+                    }break;
+                case 'c':
+                    // Este caso crea una persona con las coordenadas que se ingresan
+                    // y mueve la persona con las flechas
+                    //i = Integer.parseInt(command.substring(1));
+
+                    Person persona = new Person();
+                    double double1 = in.nextDouble();
+                    double double2 = in.nextDouble();
+                    System.out.println("X:"+double1);
+                    // Crear una persona con las coordenadas que se ingresan y añadir al array
+                    persona.setX(double1);
+                    System.out.println("Y:"+double2);
+                    persona.setY(double2);
+                    central.getPeople().add(persona);
+                    break;
+
+                case 'p':
+                    // Este caso mueve la persona con las flechas
+                    i = Integer.parseInt(command.substring(1));
+                    parameter = in.next().charAt(0);
+                    if(parameter == '↑'){
+                        central.getPeople().get(i).moveNorth();
+                    }
+                    else if (parameter == '↓'){
+                        central.getPeople().get(i).moveSouth();
+                    }
+                    else if (parameter == '←'){
+                        central.getPeople().get(i).moveWest();
+                    }
+                    else if (parameter == '→'){
+                        central.getPeople().get(i).moveEast();
                     }
                     break;
-                case 'c':
-                    i = Integer.parseInt(command.substring(1));
-                    int number;
-                    person = new Person();
-                    parameter = in.next().charAt(0);
-                    if(parameter == '0'){number = 0;}else{
-                        number = parameter;
-                        number = number-48;
-                    }
-                    person.setX(number);
-                    parameter = in.next().charAt(0);
-                    if(parameter == '0'){number = 0;}else{
-                        number = parameter;
-                        number = number-48;
-                    }        // esto no funciona al 100% si alguien ingresa la lesera con un numero decimal creo que no funcianara
-                    person.setY(number);
-
-                    //hacer un for hasta que suene la alarma con el PIR, moviendo la persona con las flechas
-                    while(!pir.get(i).getState_pir()){
-                        parameter = in.next().charAt(0);
-                        switch (parameter) {
-                            case '↑':
-                                person.moveNorth();
-                                break;
-                            case '↓':
-                                person.moveSouth();
-                                break;
-                            case '→':
-                                person.moveEast();
-                                break;
-                            case '←':
-                                person.moveWest();
-                                break;
-                        }
-
-
-                    }
                 case 'x': done=true;
                 break;
                 default:
                     System.out.println("Error, comando invalido");
                     break;
             }if(!done) {
-                //printState(step, out);
-                //System.out.println("if!Done");
                 out.println();
             }
             central.checkZone();
@@ -139,8 +148,11 @@ public class Stage3 {
         out.print("Step");
         for (Door door : doors) out.print("\t" + door.getHeader());
         for (Window window : windows) out.print("\t" + window.getHeader());
+        for (PIR_Detector pir : pir) out.print("\t" + pir.getHeader());
         out.print("\t" + siren.getHeader());
         out.print("\t" + central.getHeader());
+        //for (Person person : central.getPeople()) out.print("\t" + person.getHeader());
+
         out.println();
     }
     public void printState(int step, PrintStream out){
@@ -149,8 +161,15 @@ public class Stage3 {
         //System.out.println("Step: " + step);
         for (Door door : doors) out.print("\t" + door.getState());
         for (Window window : windows) out.print("\t" + window.getState());
+        for (PIR_Detector pir : pir) out.print("\t" + pir.getState());
         out.print("\t" + siren.getState());
         out.print("\t" + central.getState());
+        try {
+            for (Person person : central.getPeople()) out.print("\t" + person.getState());
+        }catch (NullPointerException e){
+            System.out.println("No hay personas");
+        }
+
 
 
     }
@@ -159,17 +178,17 @@ public class Stage3 {
             System.out.println("Usage: java Stage1 <configurationFile.txt>");
             System.exit(-1);
         }
-        Scanner in = new Scanner(new File(args[0]));
+        Scanner in = new Scanner(new File(args[0])).useLocale(Locale.US);
         //System.out.println("File: " + args[0]);
-        Stage2 stage = new Stage2();
+        Stage3 stage = new Stage3();
         stage.readConfiguration(in);
         stage.executeUserInteraction(new Scanner(System.in), new PrintStream(new File("output.csv")));
     }
 
-    private ArrayList<Door> doors;
-    private ArrayList<Window> windows;
-    private ArrayList<PIR_Detector> pir;
+    private final ArrayList<Door> doors;
+    private final ArrayList<Window> windows;
+    private final ArrayList<PIR_Detector> pir;
+    //private ArrayList<Person> person_Arr;
     private Central central;
     private Siren siren;
-    private Person person;
 }

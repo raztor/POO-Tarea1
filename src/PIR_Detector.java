@@ -1,57 +1,59 @@
-import static java.lang.Math.sqrt;
-public class PIR_Detector extends Sensor{
-
-    public PIR_Detector (){ //constructor, valores iniciales
-        direction_angle=0;
-        sensing_angle=0;
-        sensing_range=0;
-        coord_x=0;
-        coord_y=0;
-        isSounding = false;
+public class PIR_Detector{
+    public PIR_Detector (double x, double y, double direction_angle, double sensing_angle, double sensing_range){ //constructor, valores iniciales
+        s = new Sensor(this);
+        s.setState(SwitchState.CLOSE);
+        s.setPir(true);
+        this.direction_angle=direction_angle;
+        this.sensing_angle=sensing_angle;
+        this.sensing_range=sensing_range;
+        this.coord_x=x;
+        this.coord_y=y;
+    }
+    {
+        id = nextId++;
     }
 
     public void setY (float y){
         this.coord_y = y;
     }
-
     public void setX (float x){
         this.coord_x = x;
     }
 
-    public void detectMotion(){
-        float dist_person = Math.sqrt(Math.pow(p.getX()-coord_x,2)+Math.pow(p.getY()-coord_y,2)); //distancia entre dos puntos, rango y persona
-        float angle = Math.atan((p.getX()-coord_x)/(p.getY()-coord_y));
+    public String getHeader(){
+        return "Pir"+id;
+    }
+    //Get state from sensor
+    public int getState(){
+        if (s.getState() == SwitchState.CLOSE) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    //TODO Arreglar formula de detección
+    public void detectMotion(Person p){
+        System.out.println("Detectando movimiento");
+        double dist_person = Math.sqrt(Math.pow(p.getX()-coord_x,2)+Math.pow(p.getY()-coord_y,2)); //distancia entre dos puntos, rango y persona
+        double angle = Math.atan((p.getX()-coord_x)/(p.getY()-coord_y));
         if(dist_person<=sensing_range){
             if(sensing_range-(sensing_angle/2)<=angle && angle<=sensing_range+(sensing_angle/2)){
-                siren.play();
-                isSounding = true;
+                s.setState(SwitchState.OPEN);
             }
         }
         else{
-            siren.stop();
-            isSounding = false;
+            s.setState(SwitchState.CLOSE);
         }
     }
-
-    public boolean getState_pir(){return isSounding;}
-
-    public void resetMotion(){
-        siren.stop();
-    }
-
     public Sensor getSensor(){
         return s;
     }
 
-
-    private float direction_angle; //orientación del área de detección
-    private float sensing_angle; //ángulo cono sensor
-    private float sensing_range; // rango detección
-    private float coord_x;
-    private float coord_y;
-    private boolean isSounding;
-    private Siren siren;
-    protected Person p;
-
-    protected Sensor s;
-}
+    private final double direction_angle; //orientación del área de detección
+    private final double sensing_angle; //ángulo cono sensor
+    private final double sensing_range; // rango detección
+    private double coord_x;
+    private double coord_y;
+    private static int nextId=0;
+    private final int id;
+    private final Sensor s;}

@@ -82,8 +82,6 @@ public class Stage2 {
                     System.out.println("Error, comando invalido");
                     break;
             }if(!done) {
-                //printState(step, out);
-                //System.out.println("if!Done");
                 out.println();
             }
             central.checkZone();
@@ -120,8 +118,8 @@ public class Stage2 {
         stage.executeUserInteraction(new Scanner(System.in), new PrintStream(new File("output.csv")));
     }
 
-    private ArrayList<Door> doors;
-    private ArrayList<Window> windows;
+    private final ArrayList<Door> doors;
+    private final ArrayList<Window> windows;
     private Central central;
     private Siren siren;
 }

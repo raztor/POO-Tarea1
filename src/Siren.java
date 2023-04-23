@@ -15,10 +15,12 @@ public class Siren {
         aWave= new AePlayWave(dir);
         aWave.start();
         isSounding = true;
+        System.out.println("Siren is sounding");
     }
     public void stop(){
         aWave.stopSounding();
         isSounding = false;
+        System.out.println("Siren is not sounding");
     }
     public String getHeader() {
         return "Siren";

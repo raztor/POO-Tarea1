@@ -17,6 +17,7 @@ public class Stage1 {
         int numWindows = in.nextInt();
         for (int i = 0; i < numWindows; i++)
             windows.add(new Window());
+
         in.close();
     }
     public void executeUserInteraction (Scanner in, PrintStream out){
@@ -76,6 +77,6 @@ public class Stage1 {
 
     }
 
-    private ArrayList<Door> doors;
-    private ArrayList<Window> windows;
+    private final ArrayList<Door> doors;
+    private final ArrayList<Window> windows;
 }

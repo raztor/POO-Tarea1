@@ -19,12 +19,16 @@ public class Window {
         return "w"+id;
     }
     public int getState(){
-        return state.ordinal();
+        if (state == State.CLOSE) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
     public MagneticSensor getMagneticSensor() {
         return magneticSensor;
     }
-    private MagneticSensor magneticSensor;
+    private final MagneticSensor magneticSensor;
     private State state;
     private final int id;
     private static int nextId=0;

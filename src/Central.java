@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class Central {
     public Central(){
         zone0 = new ArrayList<Sensor>();
+        people = new ArrayList<Person>();
         isArmed = false;
         siren = null;
         Solo_perimetral = Boolean.FALSE;
     }
+
     public void arm() {
         isArmed=true;
     }
@@ -21,19 +23,30 @@ public class Central {
     public void setSiren(Siren s) {
         siren =s;
     }
+    public void addPerson(Person p){
+        people.add(p);
+    }
+    public ArrayList<Person> getPeople(){
+        return people;
+    }
     public void addNewSensor(Sensor s){
         zone0.add(s);
     }
     public void checkZone(){
         for (Sensor s: zone0){
-            if (s.getState()==SwitchState.OPEN){
-                if(s.getClass()==PIR_Detector)
-                    if (isArmed){
-                        if(siren.getState()==0) {
-                            siren.play();
-                            break;
-                        }
+            if (s.isPir()){
+                    System.out.println("PIR");
+                    for (Person p: people){
+                        s.getPir_Parent().detectMotion(p);
                     }
+                }
+            if (s.getState()==SwitchState.OPEN){
+                if (isArmed){
+                    if(siren.getState()==0) {
+                        siren.play();
+                        break;
+                    }
+                }
             }
         }
     }
@@ -43,9 +56,10 @@ public class Central {
     public int getState(){
         return isArmed?1:0;
     }
-    private ArrayList<Sensor> zone0;
+    private final ArrayList<Sensor> zone0;
     private boolean isArmed;
     private Siren siren;
+    private final ArrayList<Person> people;
 
-    private Boolean Solo_perimetral;
+    private final Boolean Solo_perimetral;
 }

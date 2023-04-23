@@ -1,9 +1,12 @@
 public class Sensor {
+   protected PIR_Detector pir_Parent; // Variable de instancia que hace referencia al objeto de la clase A
+
     public Sensor(){
-        this(SwitchState.OPEN);
+        state=SwitchState.CLOSE;
     }
-    public Sensor(SwitchState s){
-        state = s;
+    public Sensor(PIR_Detector pir_Parent) {
+        this.pir_Parent = pir_Parent; // Inicializa la variable de instancia en el constructor
+        state=SwitchState.CLOSE;
     }
     public SwitchState getState(){
         return state;
@@ -17,5 +20,16 @@ public class Sensor {
         else
             return "0";
     }
+    public void setPir(boolean isPir) {
+        this.isPir = isPir;
+    }
+    protected PIR_Detector getPir_Parent() {
+        return pir_Parent;
+    }
+    public boolean isPir() {
+        return isPir;
+    }
     private SwitchState state;
+    private boolean isPir;
+
 }
