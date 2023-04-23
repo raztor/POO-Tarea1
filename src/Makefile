@@ -8,11 +8,11 @@ JFLAGS=
 # Reglas
 all: Stage1.class
 
-Stage1.class: Bonus.java
+Stage1.class: Stage1.java
 	$(JAVAC) $(JFLAGS) $<
 
 run: Stage1.class
-	$(JAVA) Stage1 ./resources/config.txt
+	$(JAVA) Stage1
 
 clean:
-	rm -f *
+    rm -f *.class
