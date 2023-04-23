@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Stage4 {
-    public Stage4() {
+    public Stage4() { // valores inciales 
         doors = new ArrayList<Door>();
         windows = new ArrayList<Window>();
         pir = new ArrayList<PIR_Detector>();
@@ -70,7 +70,7 @@ public class Stage4 {
             command = in.next();
             //if (command.charAt(0)=='x') break;
             switch (command.charAt(0)) {
-                case 'd':
+                case 'd': // agregar estados de las puertas
                     i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);
                     if (parameter== 'o')
@@ -78,7 +78,7 @@ public class Stage4 {
                     else
                         doors.get(i).close();
                     break;
-                case 'w':
+                case 'w': // agregar estados de las ventanas
                     i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);
                     if (parameter == 'o'){
@@ -87,13 +87,13 @@ public class Stage4 {
                     else
                         windows.get(i).close();
                     break;
-                case 'k':
+                case 'k': // agregar Central
                     parameter = in.next().charAt(0);
                     switch (parameter) {
                         case 'a':
                             central.arm();
                             break;
-                        case 'p':
+                        case 'p': // posibilidad de armado perimetral
                             central.setSolo_perimetral(true);
                             break;
                         case 'd':
@@ -114,7 +114,7 @@ public class Stage4 {
                     central.getPeople().add(persona);
                     break;
 
-                case 'p':
+                case 'p': 
                     // Este caso mueve la persona con las flechas
                     i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);

@@ -1,5 +1,5 @@
 public class Door {
-    public Door () {
+    public Door () { //constructor, valores iniciales
         magneticSensor = new MagneticSensor();
         state = State.CLOSE;
         magneticSensor.putMagnetNearSwitch();
@@ -9,31 +9,31 @@ public class Door {
         magneticSensor.setDoor_Parent(this);
     }
     {
-        id = nextId++;
+        id = nextId++; // contador de puertas
     }
-    public void open() {
+    public void open() { // puerta abierta
         state = State.OPEN;
         magneticSensor.moveMagnetAwayFromSwitch();
     }
-    public void close() {
+    public void close() { //puerta cerrada
         state = State.CLOSE;
         magneticSensor.putMagnetNearSwitch();
     }
-    public String getHeader(){
+    public String getHeader(){ // retorna la cabecera de la puerta en el output
         return "d"+id;
     }
-    public int getState(){
+    public int getState(){ //estado de la puerta
         if (state == State.CLOSE) {
             return 1;
         } else {
             return 0;
         }
     }
-    public int getId() {
+    public int getId() { //numero de puerta
         return id;
     }
 
-    public MagneticSensor getMagneticSensor() {
+    public MagneticSensor getMagneticSensor() { //sensor magnetico de la puerta
         return magneticSensor;
     }
 

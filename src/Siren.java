@@ -10,14 +10,14 @@ public class Siren {
             exc.printStackTrace(System.out);
         }
     }
-    public void play(){
+    public void play(){ // suena la sirena
         //...
         aWave= new AePlayWave(dir);
         aWave.start();
         isSounding = true;
         System.out.println("Siren is sounding");
     }
-    public void stop(){
+    public void stop(){ // deja de sonar la sirena
         aWave.stopSounding();
         isSounding = false;
         System.out.println("Siren is not sounding");
@@ -25,7 +25,7 @@ public class Siren {
     public String getHeader() {
         return "Siren";
     }
-    public int getState() {
+    public int getState() { // verifica si está sonando la sirena
         return isSounding?1:0;
     }
     private URL dir;

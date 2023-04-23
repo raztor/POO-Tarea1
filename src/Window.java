@@ -1,5 +1,5 @@
 public class Window {
-    public Window() {
+    public Window() { // constructor, valores inciales
         magneticSensor = new MagneticSensor();
         state = State.CLOSE;
         magneticSensor.putMagnetNearSwitch();
@@ -9,27 +9,27 @@ public class Window {
         magneticSensor.setWindow_Parent(this);
     }
     {
-        id = nextId++;
+        id = nextId++; // contador de ventana
     }
-    public void open() {
+    public void open() { // ventana abierta
         state = State.OPEN;
         magneticSensor.moveMagnetAwayFromSwitch();
     }
-    public void close() {
+    public void close() { // ventana cerrada
         state = State.CLOSE;
         magneticSensor.putMagnetNearSwitch();
     }
-    public String getHeader(){
+    public String getHeader(){ //cabecera de la ventana en el output
         return "w"+id;
     }
-    public int getState(){
+    public int getState(){ // estado de la ventana
         if (state == State.CLOSE) {
             return 1;
         } else {
             return 0;
         }
     }
-    public MagneticSensor getMagneticSensor() {
+    public MagneticSensor getMagneticSensor() { // sensor magnetico de la ventana
         return magneticSensor;
     }
     private final MagneticSensor magneticSensor;

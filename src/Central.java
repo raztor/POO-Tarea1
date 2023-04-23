@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Central {
-    public Central(){
+    public Central(){ //Constructor, valores iniciales para el recibimiento de las anomalias
         zone0 = new ArrayList<Sensor>();
         zone1 = new ArrayList<Sensor>();
         zone2 = new ArrayList<Sensor>();
@@ -11,27 +11,27 @@ public class Central {
         Solo_perimetral = Boolean.FALSE;
     }
 
-    public void arm() {
+    public void arm() { //arma la central
         isArmed=true;
     }
-    public void disarm() {
+    public void disarm() { //desarma la central
         isArmed=false;
         siren.stop();
     }
 
-    public void setSiren(Siren s) {
+    public void setSiren(Siren s) { // agrega la sirena que sonará
         siren =s;
     }
-    public void addPerson(Person p){
+    public void addPerson(Person p){ //agrega una persona
         people.add(p);
     }
-    public void setSolo_perimetral(Boolean solo_perimetral) {
+    public void setSolo_perimetral(Boolean solo_perimetral) { // setea el armado perimetral
         Solo_perimetral = solo_perimetral;
     }
-    public ArrayList<Person> getPeople(){
+    public ArrayList<Person> getPeople(){ //retorna todas las personas
         return people;
     }
-    public void addNewSensor(Sensor s){
+    public void addNewSensor(Sensor s){ // se agregan los sensores a las zonas
         if (s.isPir()){
             zone2.add(s);
         }else if(s.isWindow()){
@@ -44,7 +44,7 @@ public class Central {
             }
         }
     }
-    public void checkZone(){
+    public void checkZone(){ // verifica la zona tiene un sensor activo y además está armada para activar la sirena
         if(Solo_perimetral){
             for (Sensor s: zone0){
                 if (s.getState()==SwitchState.OPEN){
