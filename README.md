@@ -5,6 +5,8 @@ Para poder facilitar la corrección separamos la tarea en varias Branch.
 
 En el main se pueden encontrar todos los archivos de todas las fases combinados, para poder probar el código en cada fase se debe usar las branches de cada base incluyendo la de Bonus,
 
+## Los makefiles se encuentran en la carpeta ./src
+
 
 
 # Tarea 1, programación orientada a objetos: Creando una alarma domiciliaria
