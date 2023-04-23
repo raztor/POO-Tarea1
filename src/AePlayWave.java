@@ -34,13 +34,14 @@ public class AePlayWave extends Thread {
 			m_one = null;
 		}
 	}
-	private URL m_url;
-	private Position curPosition;
+	private final URL m_url;
+	private final Position curPosition;
 	private final int EXTERNAL_BUFFER_SIZE = 524288; // 128Kb
 	private boolean done=false;
 	enum Position {
 		LEFT, RIGHT, NORMAL
-	};
+	}
+
 	protected AePlayWave(URL u) {
 		m_url = u;
 		curPosition = Position.NORMAL;
@@ -91,7 +92,6 @@ public class AePlayWave extends Thread {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			return;
 		} finally {
 			auline.drain();
 			auline.close();
