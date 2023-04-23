@@ -170,8 +170,6 @@ public class Stage3 {
             System.out.println("No hay personas");
         }
 
-
-
     }
     public static void main(String [] args) throws IOException {
         if (args.length != 1) {
