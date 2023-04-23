@@ -6,8 +6,8 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-public class Stage4 {
-    public Stage4() {
+public class Bonus {
+    public Bonus() {
         doors = new ArrayList<Door>();
         windows = new ArrayList<Window>();
         pir = new ArrayList<PIR_Detector>();
@@ -15,7 +15,8 @@ public class Stage4 {
     public void readConfiguration(Scanner in){
         // reading <#_doors> <#_windows> <#_PIRs>
         in.useLocale(java.util.Locale.US);
-        central = new Central();
+        //Acá se aprecia como se configura el retardo de la central
+        central = new Central(5);
         int numDoors = in.nextInt();
         for (int i = 0; i < numDoors; i++) {
             Door d = new Door();
@@ -177,7 +178,7 @@ public class Stage4 {
         }
         Scanner in = new Scanner(new File(args[0])).useLocale(Locale.US);
         //System.out.println("File: " + args[0]);
-        Stage4 stage = new Stage4();
+        Bonus stage = new Bonus();
         stage.readConfiguration(in);
         stage.executeUserInteraction(new Scanner(System.in), new PrintStream(new File("output.csv")));
     }

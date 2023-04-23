@@ -10,9 +10,28 @@ public class Central {
         siren = null;
         Solo_perimetral = Boolean.FALSE;
     }
+    public Central(int r){
+        retardo = r;
+        zone0 = new ArrayList<Sensor>();
+        zone1 = new ArrayList<Sensor>();
+        zone2 = new ArrayList<Sensor>();
+        people = new ArrayList<Person>();
+        isArmed = false;
+        siren = null;
+        Solo_perimetral = Boolean.FALSE;
+    }
 
     public void arm() {
+        if(retardo>0){
+            try {
+                System.out.println("Armando en "+retardo+" segundos");
+                Thread.sleep(retardo*1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         isArmed=true;
+        System.out.println("Central armada");
     }
     public void disarm() {
         isArmed=false;
@@ -50,6 +69,12 @@ public class Central {
                 if (s.getState()==SwitchState.OPEN){
                     if (isArmed){
                         if(siren.getState()==0) {
+                            try {
+                                System.out.println("Alarma en "+retardo+" segundos");
+                                Thread.sleep(retardo*1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             siren.play();
                             break;
                         }
@@ -61,6 +86,12 @@ public class Central {
                 if (s.getState()==SwitchState.OPEN){
                     if (isArmed){
                         if(siren.getState()==0) {
+                            try {
+                                System.out.println("Alarma en "+retardo+" segundos");
+                                Thread.sleep(retardo*1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             siren.play();
                             break;
                         }
@@ -71,6 +102,12 @@ public class Central {
                 if (s.getState()==SwitchState.OPEN){
                     if (isArmed){
                         if(siren.getState()==0) {
+                            try {
+                                System.out.println("Alarma en "+retardo+" segundos");
+                                Thread.sleep(retardo*1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             siren.play();
                             break;
                         }
@@ -86,6 +123,12 @@ public class Central {
                 if (s.getState()==SwitchState.OPEN){
                     if (isArmed){
                         if(siren.getState()==0) {
+                            try {
+                                System.out.println("Alarma en "+retardo+" segundos");
+                                Thread.sleep(retardo*1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             siren.play();
                             break;
                         }
@@ -106,6 +149,7 @@ public class Central {
     private final ArrayList<Sensor> zone2;
     private boolean isArmed;
     private Siren siren;
+    private int retardo;
     private final ArrayList<Person> people;
     private Boolean Solo_perimetral;
 }
