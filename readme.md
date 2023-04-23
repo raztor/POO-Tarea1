@@ -1,3 +1,12 @@
+# Para la corrección
+En este repositorio se encuentran todos los archivos de las fases de la tarea 1, además de un makefile para facilitar la compilación y ejecución de los códigos.
+
+Para poder facilitar la corrección separamos la tarea en varias Branch.
+
+En el main se pueden encontrar todos los archivos de todas las fases combinados, para poder probar el código en cada fase se debe usar las branches de cada base incluyendo la de Bonus,
+
+
+
 # Tarea 1, programación orientada a objetos: Creando una alarma domiciliaria
 
 El objetivo de esta tarea fue desarrollar una alarma domiciliaria con sus componentes básicas. Esta funciona con sensores PIR para detectar movimientos anómalos dentro de la vivienda y sensores magnéticos para detectar una apertura o cerradura de puertas y/o ventanas, así poder saltar una alarma (sirena) después de notificar a una central. 
@@ -16,6 +25,7 @@ Para compilar esta fase hay dos opciones:
 
 1. Usando el makefile con el comando:
     ```
+    $ make
     $ make run
     ```
 2. Usando el comando de compilación:
@@ -41,6 +51,7 @@ Para compilar esta fase hay dos opciones:
 
 1. Usando el makefile con el comando:
     ```
+    $ make
     $ make run
     ```
 2. Usando el comando de compilación:
@@ -61,6 +72,7 @@ Para compilar esta fase hay dos opciones:
 
 1. Usando el makefile con el comando:
     ```
+    $ make
     $ make run
     ```
 2. Usando el comando de compilación:
@@ -96,6 +108,7 @@ Los archivos que contiene esta etapa son:
 
 1. Usando el makefile con el comando:
     ```
+    $ make
     $ make run
     ```
 2. Usando el comando de compilación:
@@ -107,6 +120,8 @@ Los archivos que contiene esta etapa son:
 ## Extra-crédito
 
 En esta tarea decidimos optar por la bonificación, agregando la función de salida y entrada con armado y disparo retardado.
+
+Las instrcciones para el uso del bonus son igual a las del stage 4, ya que solo se agrego la funcion del retardo en central.
 
 
 
