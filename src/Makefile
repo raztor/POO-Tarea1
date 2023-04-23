@@ -1,4 +1,4 @@
-# Makefile para Stage1
+# Makefile para Bonus
 
 # Variables
 JAVAC=javac
@@ -8,11 +8,11 @@ JFLAGS=
 # Reglas
 all: Bonus.class
 
-Stage1.class: Bonus.java
+Bonus.class: Bonus.java
 	$(JAVAC) $(JFLAGS) $<
 
-run: Stage1.class
-	$(JAVA) Bonus ./resources/config.txt
+run: Bonus.class
+	$(JAVA) Bonus
 
 clean:
-	rm -f *
+    rm -f *.class
