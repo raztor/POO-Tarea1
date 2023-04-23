@@ -56,6 +56,16 @@ public class Central {
                     }
                 }
             }
+            for (Sensor s: zone1){
+                if (s.getState()==SwitchState.OPEN){
+                    if (isArmed){
+                        if(siren.getState()==0) {
+                            siren.play();
+                            break;
+                        }
+                    }
+                }
+            }
         }else{
             for (Sensor s: zone0){
                 if (s.getState()==SwitchState.OPEN){
