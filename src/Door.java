@@ -3,6 +3,10 @@ public class Door {
         magneticSensor = new MagneticSensor();
         state = State.CLOSE;
         magneticSensor.putMagnetNearSwitch();
+        magneticSensor.setDoor(true);
+        magneticSensor.setWindow(false);
+        magneticSensor.setPir(false);
+        magneticSensor.setDoor_Parent(this);
     }
     {
         id = nextId++;
@@ -24,6 +28,9 @@ public class Door {
         } else {
             return 0;
         }
+    }
+    public int getId() {
+        return id;
     }
 
     public MagneticSensor getMagneticSensor() {

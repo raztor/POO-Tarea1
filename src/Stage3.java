@@ -108,10 +108,8 @@ public class Stage3 {
                     Person persona = new Person();
                     double double1 = in.nextDouble();
                     double double2 = in.nextDouble();
-                    System.out.println("X:"+double1);
                     // Crear una persona con las coordenadas que se ingresan y añadir al array
                     persona.setX(double1);
-                    System.out.println("Y:"+double2);
                     persona.setY(double2);
                     central.getPeople().add(persona);
                     break;
@@ -188,7 +186,6 @@ public class Stage3 {
     private final ArrayList<Door> doors;
     private final ArrayList<Window> windows;
     private final ArrayList<PIR_Detector> pir;
-    //private ArrayList<Person> person_Arr;
     private Central central;
     private Siren siren;
 }

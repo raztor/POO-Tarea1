@@ -3,6 +3,10 @@ public class Window {
         magneticSensor = new MagneticSensor();
         state = State.CLOSE;
         magneticSensor.putMagnetNearSwitch();
+        magneticSensor.setWindow(true);
+        magneticSensor.setDoor(false);
+        magneticSensor.setPir(false);
+        magneticSensor.setWindow_Parent(this);
     }
     {
         id = nextId++;

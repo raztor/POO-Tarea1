@@ -1,8 +1,11 @@
 public class PIR_Detector{
     public PIR_Detector (double x, double y, double direction_angle, double sensing_angle, double sensing_range){ //constructor, valores iniciales
-        s = new Sensor(this);
+        s = new Sensor();
+        s.setPir_Parent(this);
         s.setState(SwitchState.CLOSE);
         s.setPir(true);
+        s.setDoor(false);
+        s.setWindow(false);
         this.direction_angle=direction_angle;
         this.sensing_angle=sensing_angle;
         this.sensing_range=sensing_range;
@@ -33,7 +36,6 @@ public class PIR_Detector{
     }
     //TODO Arreglar formula de detección
     public void detectMotion(Person p){
-        System.out.println("Detectando movimiento");
         double dist_person = Math.sqrt(Math.pow(p.getX()-coord_x,2)+Math.pow(p.getY()-coord_y,2)); //distancia entre dos puntos, rango y persona
         double angle = Math.atan((p.getX()-coord_x)/(p.getY()-coord_y));
         if(dist_person<=sensing_range){
