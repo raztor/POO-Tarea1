@@ -7,12 +7,12 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Stage3 {
-    public Stage3() {
+    public Stage3() { //constructor, valores iniciales: creacion de las puertas, ventanas y PIR
         doors = new ArrayList<Door>();
         windows = new ArrayList<Window>();
         pir = new ArrayList<PIR_Detector>();
     }
-    public void readConfiguration(Scanner in){
+    public void readConfiguration(Scanner in){ // lee la configuracion del config.txt
         // reading <#_doors> <#_windows> <#_PIRs>
         in.useLocale(java.util.Locale.US);
         central = new Central();
@@ -65,39 +65,39 @@ public class Stage3 {
         int step=-1;
         boolean done =false;
         printHeader(out);
-        while (!done) {
+        while (!done) { //comienzo de los input para la alarma
             printState(step++, out);
             command = in.next();
             //if (command.charAt(0)=='x') break;
             switch (command.charAt(0)) {
-                case 'd':
-                    i = Integer.parseInt(command.substring(1));
+                case 'd': //agregar estado de las puertas (la cantidad está declarada en el config)
+                    i = Integer.parseInt(command.substring(1)); 
                     parameter = in.next().charAt(0);
-                    if (parameter== 'o')
+                    if (parameter== 'o') // puerta abierta
                         doors.get(i).open();
                     else
-                        doors.get(i).close();
+                        doors.get(i).close(); // se cierra la puerta
                     break;
-                case 'w':
+                case 'w': //agregar estado de las ventanas (cantidad declarada en el config)
                     i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);
-                    if (parameter == 'o'){
+                    if (parameter == 'o'){ //ventana abierta
                         windows.get(i).open();
                     }
-                    else
-                        windows.get(i).close();
+                    else 
+                        windows.get(i).close(); //ventana cerrada
                     break;
-                case 'k':
+                case 'k': // creación de la central 
                     parameter = in.next().charAt(0);
                     switch (parameter) {
-                        case 'a':
+                        case 'a': // armado de la central
                             central.arm();
                             break;
                         case 'p':
                             //central.permimeter();
                             break;
-                        case 'd':
-                            central.disarm();
+                        case 'd': //desarmado de la central
+                            central.disarm(); 
                             break;
                     }break;
                 case 'c':
@@ -144,7 +144,7 @@ public class Stage3 {
             central.checkZone();
         }
     }
-    public void printHeader(PrintStream out){
+    public void printHeader(PrintStream out){ // cabecera del output
         out.print("Step");
         for (Door door : doors) out.print("\t" + door.getHeader());
         for (Window window : windows) out.print("\t" + window.getHeader());

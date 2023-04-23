@@ -10,13 +10,13 @@ public class PIR_Detector{
         this.coord_y=y;
     }
     {
-        id = nextId++;
+        id = nextId++; // contador de PIRs
     }
 
-    public void setY (float y){
+    public void setY (float y){ // seteo de la coordenada Y del PIR
         this.coord_y = y;
     }
-    public void setX (float x){
+    public void setX (float x){ // seteo de la coordenada X del PIR
         this.coord_x = x;
     }
 
@@ -31,8 +31,8 @@ public class PIR_Detector{
             return 0;
         }
     }
-    //TODO Arreglar formula de detección
-    public void detectMotion(Person p){
+ 
+    public void detectMotion(Person p){ // detección de movimiento en área del PIR
         System.out.println("Detectando movimiento");
         double dist_person = Math.sqrt(Math.pow(p.getX()-coord_x,2)+Math.pow(p.getY()-coord_y,2)); //distancia entre dos puntos, rango y persona
         double angle = Math.atan((p.getX()-coord_x)/(p.getY()-coord_y));
@@ -45,7 +45,7 @@ public class PIR_Detector{
             s.setState(SwitchState.CLOSE);
         }
     }
-    public Sensor getSensor(){
+    public Sensor getSensor(){ //retorna el sensor asociado a PIR
         return s;
     }
 
