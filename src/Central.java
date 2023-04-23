@@ -69,12 +69,16 @@ public class Central {
                 if (s.getState()==SwitchState.OPEN){
                     if (isArmed){
                         if(siren.getState()==0) {
-                            try {
-                                System.out.println("Alarma en "+retardo+" segundos");
-                                Thread.sleep(retardo*1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            siren.play();
+                            break;
+                        }
+                    }
+                }
+            }
+            for (Sensor s: zone1){
+                if (s.getState()==SwitchState.OPEN){
+                    if (isArmed){
+                        if(siren.getState()==0) {
                             siren.play();
                             break;
                         }
