@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Stage1 {
-    public Stage1() {
+    public Stage1() { //constructor, valores iniciales: creacion de las puertas y ventanas.
         doors = new ArrayList<Door>();
         windows = new ArrayList<Window>();
     }
-    public void readConfiguration(Scanner in){
+    public void readConfiguration(Scanner in){ // lee la configuracion del config.txt
         // reading <#_doors> <#_windows> <#_PIRs>
         int numDoors = in.nextInt();
         for (int i = 0; i < numDoors; i++)
@@ -24,25 +24,25 @@ public class Stage1 {
         int step=0;
         boolean done =false;
         printHeader(out);
-        while (!done) {
+        while (!done) { //comienzo de los input para el sensor
             command = in.next().charAt(0);
             switch (command) {
-                case 'd':
+                case 'd': //agregar estado de las puertas (cantidad está declarada en el config)
                     parameter = in.next().charAt(0);
                     if (parameter == 'o') {
-                        doors.get(0).open();
+                        doors.get(0).open(); // puerta abierta
                     }
                     else
-                        doors.get(0).close();
+                        doors.get(0).close(); // puerta cerrada
                     break;
 
-                case 'w':
+                case 'w': //agregar estado de las ventanas (cantidad declarada en el config)
                     parameter = in.next().charAt(0);
                     if (parameter == 'o'){
-                        windows.get(0).open();
+                        windows.get(0).open(); //ventana abierta
                     }
                     else
-                        windows.get(0).close();
+                        windows.get(0).close(); //ventana cerrada
                     break;
 
                 case 'x': done=true;
