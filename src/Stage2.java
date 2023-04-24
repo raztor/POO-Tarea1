@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Stage2 {
-    public Stage2() {
+    public Stage2() { //constructor, valores iniciales: creacion de las puertas y ventanas.
         doors = new ArrayList<Door>();
         windows = new ArrayList<Window>();
     }
-    public void readConfiguration(Scanner in){
+    public void readConfiguration(Scanner in){ // lee la configuracion del config.txt
         // reading <#_doors> <#_windows> <#_PIRs>
         central = new Central();
         int numDoors = in.nextInt();
@@ -17,7 +17,7 @@ public class Stage2 {
             Door d = new Door();
             doors.add(d);
             central.addNewSensor(d.getMagneticSensor());
-            //...
+
         }
         int numWindows = in.nextInt();
         for (int i = 0; i < numWindows; i++) {
@@ -25,7 +25,6 @@ public class Stage2 {
             windows.add(w);
             central.addNewSensor(w.getMagneticSensor());
 
-            //...
         }
         in.nextLine();
         String soundFile = in.next();
@@ -40,38 +39,38 @@ public class Stage2 {
         int step=-1;
         boolean done =false;
         printHeader(out);
-        while (!done) {
+        while (!done) { //comienzo de los input para la alarma
             printState(step++, out);
             command = in.next();
             //if (command.charAt(0)=='x') break;
             switch (command.charAt(0)) {
-                case 'd':
+                case 'd': //agregar estado de las puertas (la cantidad está declarada en el config)
                     i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);
                     if (parameter== 'o')
-                        doors.get(i).open();
+                        doors.get(i).open(); // puerta abierta
                     else
-                        doors.get(i).close();
+                        doors.get(i).close(); // se cierra la puerta
                     break;
-                case 'w':
+                case 'w': //agregar estado de las ventanas (cantidad declarada en el config)
                     i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);
                     if (parameter == 'o'){
-                        windows.get(i).open();
+                        windows.get(i).open(); //ventana abierta
                     }
                     else
-                        windows.get(i).close();
+                        windows.get(i).close(); //ventana cerrada
                     break;
-                case 'k':
+                case 'k': // creación de la central
                     parameter = in.next().charAt(0);
                     switch (parameter) {
-                        case 'a':
+                        case 'a': // armado de la central
                             central.arm();
                             break;
                         case 'p':
                             //central.permimeter();
                             break;
-                        case 'd':
+                        case 'd': //desarmado de la central
                             central.disarm();
                             break;
                     }
@@ -89,7 +88,7 @@ public class Stage2 {
             central.checkZone();
         }
     }
-    public void printHeader(PrintStream out){
+    public void printHeader(PrintStream out){ // cabecera del output
         out.print("Step");
         for (Door door : doors) out.print("\t" + door.getHeader());
         for (Window window : windows) out.print("\t" + window.getHeader());
